@@ -31,6 +31,8 @@
         <activity android:name=".ProductDetailActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".CustomerActivity" />
+        <activity android:name=".CheckoutActivity" />
+        <activity android:name=".OrderHistoryActivity" />
     </application>
 
 </manifest>

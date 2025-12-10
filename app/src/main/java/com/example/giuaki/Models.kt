@@ -12,13 +12,13 @@ data class Product(
 ) : Serializable
 
 data class CartItem(
-    val product: Product,
-    var quantity: Int
+    val product: Product = Product(),
+    var quantity: Int = 0
 )
 
 // Cập nhật model Order thêm paymentMethod
 data class Order(
-    val id: String = "",
+    var id: String = "",
     val userId: String = "",
     val userName: String = "",
     val userPhone: String = "",

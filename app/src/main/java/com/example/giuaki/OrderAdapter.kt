@@ -9,9 +9,6 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.collections.joinToString
-import kotlin.text.takeLast
-import kotlin.text.uppercase
 
 class OrderAdapter(private val orders: List<Order>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
@@ -35,11 +32,12 @@ class OrderAdapter(private val orders: List<Order>) :
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order = orders[position]
 
-        // 1. Hiển thị Mã đơn hàng (cắt ngắn 6 ký tự cuối cho gọn và uppercase)
-        val shortId = if (order.id.length > 6) "..." + order.id.takeLast(6).uppercase() else order.id
+        // 1. Hiển thị Mã đơn hàng (An toàn: kiểm tra null trước khi xử lý chuỗi)
+        val orderId = order.id ?: "" // Nếu id null thì gán chuỗi rỗng
+        val shortId = if (orderId.length > 6) "..." + orderId.takeLast(6).uppercase() else orderId
         holder.tvOrderId.text = "Mã đơn: $shortId"
 
-        // 2. Format ngày tháng từ timestamp (Long) sang chuỗi dễ đọc
+        // 2. Format ngày tháng
         val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
         holder.tvOrderDate.text = sdf.format(Date(order.orderDate))
 
@@ -47,13 +45,27 @@ class OrderAdapter(private val orders: List<Order>) :
         val formatter = DecimalFormat("#,###")
         holder.tvOrderTotal.text = "${formatter.format(order.totalPrice)} VND"
 
-        // 4. Hiển thị trạng thái đơn hàng (Mặc định là "Đang xử lý")
-        holder.tvOrderStatus.text = order.status
+        // 4. Hiển thị trạng thái
+        holder.tvOrderStatus.text = order.status ?: "Đang xử lý"
 
-        // 5. Tóm tắt danh sách sản phẩm (Ví dụ: "CPU i9 x1, RAM 8GB x2")
-        // Dùng joinToString để nối tên các sản phẩm lại với nhau
-        val summary = order.items.joinToString(", ") { "${it.product.name} x${it.quantity}" }
-        holder.tvOrderSummary.text = summary
+        // 5. Tóm tắt danh sách sản phẩm (ĐÃ SỬA LỖI CRASH TẠI ĐÂY)
+        // Dùng try-catch và kiểm tra null để tránh app bị tắt đột ngột nếu dữ liệu lỗi
+        try {
+            if (order.items != null && order.items.isNotEmpty()) {
+                val summary = order.items.joinToString(", ") { item ->
+                    // Kiểm tra kỹ: nếu item.product bị null thì hiện tên mặc định
+                    val productName = item.product?.name ?: "Sản phẩm (?)"
+                    "$productName x${item.quantity}"
+                }
+                holder.tvOrderSummary.text = summary
+            } else {
+                holder.tvOrderSummary.text = "Không có thông tin chi tiết"
+            }
+        } catch (e: Exception) {
+            // Nếu có bất kỳ lỗi gì khi xử lý chuỗi, app vẫn chạy tiếp và hiện thông báo lỗi nhẹ
+            holder.tvOrderSummary.text = "Lỗi hiển thị danh sách"
+            e.printStackTrace()
+        }
     }
 
     override fun getItemCount(): Int = orders.size
