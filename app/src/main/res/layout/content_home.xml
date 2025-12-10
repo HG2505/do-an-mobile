@@ -13,20 +13,20 @@
         android:paddingTop="10dp"
         android:paddingBottom="20dp">
 
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            app:srcCompat="@drawable/build" />
+            app:srcCompat="@drawable/build"
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/ghe" />
+            app:srcCompat="@drawable/ghe"
+            android:scaleType="centerCrop"/>
 
 
-        <!-- 2. Categories Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,6 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="20dp">
 
-                <!-- Item 1: CPU -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,6 +58,7 @@
                     android:padding="5dp">
 
                     <ImageView
+                        android:id="@+id/imgCPU"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/ic_menu_gallery"
@@ -73,7 +73,6 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Item 2: VGA -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,6 +82,7 @@
                     android:padding="5dp">
 
                     <ImageView
+                        android:id="@+id/imgVGA"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:padding="10dp"
@@ -96,7 +96,6 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Item 3: RAM -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,6 +105,7 @@
                     android:padding="5dp">
 
                     <ImageView
+                        android:id="@+id/imgRAM"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:padding="10dp"
@@ -119,10 +119,77 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgMB"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:src="@android:drawable/ic_menu_agenda"
+                        app:tint="#673AB7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mainboard"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgPSU"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:src="@android:drawable/ic_lock_power_off"
+                        app:tint="#F44336" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nguồn"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgSSD"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:src="@android:drawable/stat_sys_data_bluetooth"
+                        app:tint="#00BCD4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SSD"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
             </LinearLayout>
         </HorizontalScrollView>
-
-        <!-- 3. Popular Products (Simplified) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,101 +200,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Grid Products (Reduced to 2 items) -->
-        <GridLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFeaturedProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="10dp"
-            android:columnCount="2"
-            android:rowCount="1">
-
-            <!-- Product 1 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        app:srcCompat="@drawable/cardrtx" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        android:layout_marginTop="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="MSI RTX 3060 12GB GDDR6 Ventus 2X OC"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="8.500.000đ"
-                        android:textColor="#D32F2F"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Product 2 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:scaleType="centerInside"
-                        app:srcCompat="@drawable/chipi5" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="CPU Intel Core i5 13600K"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="33dp"
-                        android:text="7.200.000đ"
-                        android:textColor="#D32F2F"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </GridLayout>
-
+            android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
