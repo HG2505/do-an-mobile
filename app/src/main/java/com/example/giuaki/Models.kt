@@ -15,9 +15,26 @@ data class CartItem(
     val product: Product,
     var quantity: Int
 )
+
+// Cập nhật model Order thêm paymentMethod
+data class Order(
+    val id: String = "",
+    val userId: String = "",
+    val userName: String = "",
+    val userPhone: String = "",
+    val userAddress: String = "",
+    val items: List<CartItem> = emptyList(),
+    val totalPrice: Double = 0.0,
+    val paymentMethod: String = "", // Thêm trường này
+    val status: String = "Đang xử lý",
+    val orderDate: Long = System.currentTimeMillis()
+) : Serializable
+
 object CartRepository {
     private val items = mutableListOf<CartItem>()
+
     fun getItems(): MutableList<CartItem> = items
+
     fun addToCart(product: Product) {
         val existingItem = items.find { it.product.id == product.id }
         if (existingItem != null) {
@@ -26,14 +43,26 @@ object CartRepository {
             items.add(CartItem(product, 1))
         }
     }
+
+    // Hàm xóa sản phẩm khỏi giỏ
+    fun removeFromCart(item: CartItem) {
+        items.remove(item)
+    }
+
+    // Hàm cập nhật số lượng
+    fun updateQuantity(item: CartItem, newQuantity: Int) {
+        if (newQuantity > 0) {
+            item.quantity = newQuantity
+        } else {
+            items.remove(item)
+        }
+    }
+
     fun getTotalPrice(): Double {
         return items.sumOf { it.product.price * it.quantity }
     }
+
     fun clearCart() {
         items.clear()
-    }
-    // Hàm xóa 1 sản phẩm khỏi giỏ (nếu cần sau này)
-    fun removeFromCart(product: Product) {
-        items.removeIf { it.product.id == product.id }
     }
 }
