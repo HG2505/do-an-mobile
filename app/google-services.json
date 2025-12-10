@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "705303677459",
+    "project_id": "myapplication-b390b417",
+    "storage_bucket": "myapplication-b390b417.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705303677459:android:043404a36f0ee4602acde6",
+        "android_client_info": {
+          "package_name": "com.example.giuaki"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWiX9nqoSHky1rjmgPVLoInofUC1wI2e8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
