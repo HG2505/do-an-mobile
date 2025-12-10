@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F7FA">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/btnBackCheckout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xác nhận đơn hàng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Thông tin người nhận -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ nhận hàng"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/edtReceiverName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Họ và tên"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/edtReceiverPhone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Số điện thoại"
+                android:inputType="phone"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/edtReceiverAddress"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:hint="Số nhà, Đường, Quận/Huyện..."
+                android:gravity="top|start"
+                android:padding="12dp"
+                android:background="#FFFFFF"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Phương thức thanh toán -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phương thức thanh toán"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp">
+
+                <!-- COD -->
+                <RadioButton
+                    android:id="@+id/rbCOD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thanh toán khi nhận hàng (COD)"
+                    android:checked="true"/>
+
+                <!-- Chuyển khoản -->
+                <RadioButton
+                    android:id="@+id/rbBankTransfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chuyển khoản ngân hàng"/>
+
+                <!-- Layout thông tin Ngân hàng (Mặc định ẩn) -->
+                <LinearLayout
+                    android:id="@+id/layoutBankInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#E3F2FD"
+                    android:padding="10dp"
+                    android:layout_marginStart="30dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ngân hàng: Vietcombank"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="STK: 999988886666"
+                        android:textColor="#D32F2F"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chủ TK: PC GEAR SHOP"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nội dung: SDT_TenKhachHang"
+                        android:layout_marginTop="4dp"
+                        android:textStyle="italic"/>
+                </LinearLayout>
+
+                <!-- Momo -->
+                <RadioButton
+                    android:id="@+id/rbMomo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ví MoMo"/>
+
+                <!-- Layout thông tin Momo (Mặc định ẩn) -->
+                <LinearLayout
+                    android:id="@+id/layoutMomoInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FCE4EC"
+                    android:padding="10dp"
+                    android:layout_marginStart="30dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Quét mã hoặc chuyển đến:"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SĐT Momo: 0909123456"
+                        android:textColor="#E91E63"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nội dung: SDT_TenKhachHang"
+                        android:layout_marginTop="4dp"
+                        android:textStyle="italic"/>
+                </LinearLayout>
+
+            </RadioGroup>
+
+            <!-- Tóm tắt đơn hàng -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chi tiết thanh toán"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Phí vận chuyển"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30.000đ"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEE" android:layout_marginVertical="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Thành tiền"
+                        android:textSize="16sp"
+                        android:textColor="#333"/>
+                    <TextView
+                        android:id="@+id/tvCheckoutTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 VND"
+                        android:textSize="18sp"
+                        android:textColor="#FF5722"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="ĐẶT HÀNG"
+        android:backgroundTint="#FF5722"
+        android:layout_margin="16dp"
+        android:textStyle="bold"/>
+
+</LinearLayout>
