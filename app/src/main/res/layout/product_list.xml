@@ -6,11 +6,10 @@
     android:orientation="vertical"
     android:background="#F5F7FA">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
+        android:background="#2962FF"
         android:gravity="center_vertical"
         android:paddingHorizontal="16dp"
         android:elevation="4dp">
@@ -21,6 +20,7 @@
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_revert"
             android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#FFFFFF"
             android:contentDescription="Back"/>
 
         <TextView
@@ -30,11 +30,10 @@
             android:text="Tên Danh Mục"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#333"
+            android:textColor="#FFFFFF"
             android:layout_marginStart="16dp"/>
     </LinearLayout>
 
-    <!-- RecyclerView hiển thị sản phẩm -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductList"
         android:layout_width="match_parent"

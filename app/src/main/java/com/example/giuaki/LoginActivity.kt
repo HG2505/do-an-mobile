@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: MaterialButton
     private lateinit var tvRegister: TextView
     private lateinit var btnGoogleLogin: ImageView
-        private lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_screen)
@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         initViews()
         setupListeners()
     }
+
     private fun initViews() {
         tilEmail = findViewById(R.id.til_email)
         etEmail = findViewById(R.id.et_email)
@@ -38,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
         btnGoogleLogin = findViewById(R.id.imageView3) // Nút Google (đang là imageView3 trong XML)
 
     }
+
     private fun setupListeners() {
         btnLogin.setOnClickListener {
             handleLogin()
@@ -47,9 +49,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnGoogleLogin.setOnClickListener {
-            Toast.makeText(this, "Chức năng đăng nhập Google đang phát triển", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Chức năng đăng nhập Google đang phát triển", Toast.LENGTH_SHORT)
+                .show()
         }
     }
+
     private fun handleLogin() {
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
@@ -82,6 +86,17 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                 }
+        }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Nếu user hiện tại khác null -> Đã đăng nhập -> Chuyển thẳng vào Home
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

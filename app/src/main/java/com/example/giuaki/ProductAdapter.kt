@@ -45,6 +45,17 @@ class ProductAdapter(private val productList: List<Product>) :
                 Toast.LENGTH_SHORT
             ).show()
         }
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = android.content.Intent(context, ProductDetailActivity::class.java)
+
+            // Truyền toàn bộ đối tượng product sang màn hình chi tiết
+            // (Yêu cầu: Class Product phải có ": Serializable" như bạn đã làm ở các bước trước)
+            intent.putExtra("PRODUCT_DATA", product)
+
+            context.startActivity(intent)
+        }
     }
     override fun getItemCount(): Int = productList.size
 }
