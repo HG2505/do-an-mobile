@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F7FA">
+
+    <!-- Header: Thanh tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/btnBackHistory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Quay lại"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch sử mua hàng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Danh sách lịch sử đơn hàng -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOrderHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"/>
+
+</LinearLayout>
