@@ -30,6 +30,7 @@
         <activity android:name=".ProductListActivity" />
         <activity android:name=".ProductDetailActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".CustomerActivity" />
     </application>
 
 </manifest>

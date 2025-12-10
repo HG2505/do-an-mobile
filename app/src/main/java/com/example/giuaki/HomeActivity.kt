@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,7 +26,8 @@ class HomeActivity : AppCompatActivity() {
 
         val imgCart = findViewById<ImageView>(R.id.imgCart)
         val imgCategory = findViewById<ImageView>(R.id.imgCategories)
-        val imgCustomer = findViewById<ImageView>(R.id.imgCustomer)
+        val imgCustomer = findViewById<ImageView>(R.id.imgavatar)
+        val search= findViewById<TextView>(R.id.tvSearch)
         val imgCPU = findViewById<ImageView>(R.id.imgCPU)
         val imgVGA = findViewById<ImageView>(R.id.imgVGA)
         val imgRAM = findViewById<ImageView>(R.id.imgRAM)
@@ -43,6 +45,9 @@ class HomeActivity : AppCompatActivity() {
         }
         imgCustomer.setOnClickListener {
             val intent = Intent(this, CustomerActivity::class.java)
+            startActivity(intent)
+        }
+        search.setOnClickListener { val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
 
