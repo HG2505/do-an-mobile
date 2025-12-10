@@ -29,6 +29,7 @@
         <activity android:name=".CategoryActivity" />
         <activity android:name=".ProductListActivity" />
         <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".SearchActivity" />
     </application>
 
 </manifest>
