@@ -66,4 +66,7 @@ dependencies {
 
     // 5. Glide (Để hiển thị ảnh từ link Firebase lên App)
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Google Play Services Auth (cần thiết cho Google Sign In)
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 }

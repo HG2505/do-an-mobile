@@ -163,15 +163,12 @@ class HomeActivity : AppCompatActivity() {
                         Log.e("FirestoreError", "Lỗi convert: ${e.message}")
                     }
                 }
-
                 val categories = listOf("cpu", "vga", "ram", "mainboard", "ssd", "psu")
-
                 for (cat in categories) {
                     val randomTop2 = tempAllProducts
                         .filter { it.category == cat }
                         .shuffled()
                         .take(2)
-
                     featuredList.addAll(randomTop2)
                 }
                 adapter.notifyDataSetChanged()

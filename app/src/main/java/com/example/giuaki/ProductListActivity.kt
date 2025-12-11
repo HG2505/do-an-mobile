@@ -8,13 +8,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FirebaseFirestore // Import thư viện Firestore
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProductListActivity : AppCompatActivity() {
 
     private lateinit var rvProductList: RecyclerView
     private lateinit var adapter: ProductAdapter
-    // Danh sách sản phẩm, ban đầu rỗng để chờ dữ liệu từ mạng về
     private val productList = mutableListOf<Product>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

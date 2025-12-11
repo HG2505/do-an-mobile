@@ -12,7 +12,20 @@
           "package_name": "com.example.giuaki"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "705303677459-ldis7k0rg3e01mtnjrh0r6gb8ncrfsde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.giuaki",
+            "certificate_hash": "d91f1729705208416aa91f03d6145b884adedc8b"
+          }
+        },
+        {
+          "client_id": "705303677459-td0pt3s6099rccprrin17tcnoah2d2a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBWiX9nqoSHky1rjmgPVLoInofUC1wI2e8"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705303677459-td0pt3s6099rccprrin17tcnoah2d2a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

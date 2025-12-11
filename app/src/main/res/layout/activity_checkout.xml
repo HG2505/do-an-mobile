@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F7FA">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFFFFF"
+        android:background="#2962FF"
         android:gravity="center_vertical"
         android:paddingHorizontal="16dp"
         android:elevation="4dp">
@@ -19,7 +19,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_revert"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#FFFFFF"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
             android:text="Xác nhận đơn hàng"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#333"
+            android:textColor="#FFFFFF"
             android:layout_marginStart="16dp"/>
     </LinearLayout>
 
@@ -42,7 +43,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Thông tin người nhận -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,6 @@
                 android:background="#FFFFFF"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- Phương thức thanh toán -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,7 +94,6 @@
                 android:padding="10dp"
                 android:layout_marginBottom="20dp">
 
-                <!-- COD -->
                 <RadioButton
                     android:id="@+id/rbCOD"
                     android:layout_width="match_parent"
@@ -103,14 +101,12 @@
                     android:text="Thanh toán khi nhận hàng (COD)"
                     android:checked="true"/>
 
-                <!-- Chuyển khoản -->
                 <RadioButton
                     android:id="@+id/rbBankTransfer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Chuyển khoản ngân hàng"/>
 
-                <!-- Layout thông tin Ngân hàng (Mặc định ẩn) -->
                 <LinearLayout
                     android:id="@+id/layoutBankInfo"
                     android:layout_width="match_parent"
@@ -145,14 +141,12 @@
                         android:textStyle="italic"/>
                 </LinearLayout>
 
-                <!-- Momo -->
                 <RadioButton
                     android:id="@+id/rbMomo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ví MoMo"/>
 
-                <!-- Layout thông tin Momo (Mặc định ẩn) -->
                 <LinearLayout
                     android:id="@+id/layoutMomoInfo"
                     android:layout_width="match_parent"
@@ -185,7 +179,6 @@
 
             </RadioGroup>
 
-            <!-- Tóm tắt đơn hàng -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
