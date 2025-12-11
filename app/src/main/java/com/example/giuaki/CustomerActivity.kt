@@ -29,6 +29,13 @@ class CustomerActivity : AppCompatActivity() {
             val intent = Intent(this, OrderHistoryActivity::class.java)
             startActivity(intent)
         }
+
+        val btnAddress = findViewById<LinearLayout>(R.id.btnAddress)
+        btnAddress.setOnClickListener {
+            val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+        }
+
         btnLogout.setOnClickListener {
             auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)

@@ -14,11 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DecimalFormat
-import kotlin.collections.toList
-import kotlin.text.isEmpty
-import kotlin.text.trim
 
 class CheckoutActivity : AppCompatActivity() {
+
+    // 1. KHAI BÁO BIẾN Ở ĐÂY ĐỂ DÙNG ĐƯỢC TOÀN CỤC (QUAN TRỌNG)
+    private lateinit var edtName: EditText
+    private lateinit var edtPhone: EditText
+    private lateinit var edtAddress: EditText
+    // -----------------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,23 +29,28 @@ class CheckoutActivity : AppCompatActivity() {
 
         val btnBack = findViewById<ImageButton>(R.id.btnBackCheckout)
         val tvTotal = findViewById<TextView>(R.id.tvCheckoutTotal)
-        val edtName = findViewById<EditText>(R.id.edtReceiverName)
-        val edtPhone = findViewById<EditText>(R.id.edtReceiverPhone)
-        val edtAddress = findViewById<EditText>(R.id.edtReceiverAddress)
+
+        // 2. ÁNH XẠ VIEW (Gán vào biến đã khai báo ở trên)
+        edtName = findViewById(R.id.edtReceiverName)
+        edtPhone = findViewById(R.id.edtReceiverPhone)
+        edtAddress = findViewById(R.id.edtReceiverAddress)
 
         val rgPayment = findViewById<RadioGroup>(R.id.rgPaymentMethod)
         val layoutBankInfo = findViewById<LinearLayout>(R.id.layoutBankInfo)
         val layoutMomoInfo = findViewById<LinearLayout>(R.id.layoutMomoInfo)
         val btnConfirm = findViewById<Button>(R.id.btnPlaceOrder)
+
         val formatter = DecimalFormat("#,###")
         val shipFee = 30000.0
         val subTotal = CartRepository.getTotalPrice()
         val finalTotal = subTotal + shipFee
         tvTotal.text = "${formatter.format(finalTotal)} VND"
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            edtName.setText(currentUser.displayName)
-        }
+
+        // --- PHẦN NÀY ĐÃ SỬA ---
+        // Thay vì chỉ lấy mỗi tên từ Auth, ta gọi hàm loadUserInfo để lấy đủ Tên, SĐT, Địa chỉ từ Firestore
+        loadUserInfo()
+        // -----------------------
+
         rgPayment.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rbBankTransfer -> {
@@ -60,6 +68,7 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
         btnBack.setOnClickListener { finish() }
+
         btnConfirm.setOnClickListener {
             val name = edtName.text.toString().trim()
             val phone = edtPhone.text.toString().trim()
@@ -77,11 +86,38 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
     }
+    private fun loadUserInfo() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val userId = user?.uid
+
+        if (userId != null) {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("Users").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val savedName = document.getString("fullName") ?: user.displayName ?: ""
+                        val savedPhone = document.getString("phoneNumber") ?: ""
+                        val savedAddress = document.getString("address") ?: ""
+
+                        // Điền vào ô nhập liệu
+                        edtName.setText(savedName)
+                        edtPhone.setText(savedPhone)
+                        edtAddress.setText(savedAddress)
+                    } else {
+                        edtName.setText(user.displayName)
+                    }
+                }
+                .addOnFailureListener {
+                }
+        }
+    }
     private fun saveOrderToFirebase(name: String, phone: String, address: String, total: Double, paymentMethod: String) {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "GUEST"
         val orderRef = db.collection("Orders").document()
         val orderId = orderRef.id
+
         val order = Order(
             id = orderId,
             userId = userId,
