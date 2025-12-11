@@ -13,28 +13,29 @@ class CustomerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.customer_activity) // Đảm bảo bạn đã có file xml này
+        setContentView(R.layout.customer_activity)
 
         auth = FirebaseAuth.getInstance()
 
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         val tvCustomerName = findViewById<TextView>(R.id.tvCustomerName)
-        val btnOrderHistory = findViewById<LinearLayout>(R.id.btnOrderHistory) // Nút xem lịch sử
-
-        // Hiển thị tên user
+        val btnOrderHistory = findViewById<LinearLayout>(R.id.btnOrderHistory)
         val user = auth.currentUser
         if (user != null) {
             val name = user.displayName ?: user.email ?: "Khách hàng"
             tvCustomerName.text = name
         }
-
-        // Sự kiện xem lịch sử
         btnOrderHistory.setOnClickListener {
             val intent = Intent(this, OrderHistoryActivity::class.java)
             startActivity(intent)
         }
 
-        // Sự kiện đăng xuất
+        val btnAddress = findViewById<LinearLayout>(R.id.btnAddress)
+        btnAddress.setOnClickListener {
+            val intent = Intent(this, AddressActivity::class.java)
+            startActivity(intent)
+        }
+
         btnLogout.setOnClickListener {
             auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)

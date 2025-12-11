@@ -78,7 +78,6 @@ class RegisterActivity : AppCompatActivity() {
             tilEmail.error = "Địa chỉ Email không hợp lệ"
             isValid = false
         }
-
         if (password.isEmpty()) {
             tilPassword.error = "Vui lòng nhập mật khẩu"
             isValid = false
@@ -86,7 +85,6 @@ class RegisterActivity : AppCompatActivity() {
             tilPassword.error = "Mật khẩu phải có ít nhất 6 ký tự"
             isValid = false
         }
-
         if (confirmPassword.isEmpty()) {
             tilConfirmPassword.error = "Vui lòng xác nhận mật khẩu"
             isValid = false
@@ -94,7 +92,6 @@ class RegisterActivity : AppCompatActivity() {
             tilConfirmPassword.error = "Mật khẩu xác nhận không khớp"
             isValid = false
         }
-
         if (isValid) {
             // TODO: Gọi API đăng ký hoặc Firebase SignUp tại đây
             Toast.makeText(this, "Đăng ký thành công tài khoản: $email", Toast.LENGTH_SHORT).show()

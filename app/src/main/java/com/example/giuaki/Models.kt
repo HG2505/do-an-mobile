@@ -2,6 +2,14 @@ package com.example.giuaki
 
 import java.io.Serializable
 
+
+data class Category(
+    val id: Int,
+    val name: String,
+    val icon: Int,
+    val bgColor: String,
+    val textColor: String
+)
 data class Product(
     val id: String = "",
     val name: String = "",
@@ -10,13 +18,10 @@ data class Product(
     val imageUrl: String = "",
     val category: String = ""
 ) : Serializable
-
 data class CartItem(
     val product: Product = Product(),
     var quantity: Int = 0
 )
-
-// Cập nhật model Order thêm paymentMethod
 data class Order(
     var id: String = "",
     val userId: String = "",
@@ -25,7 +30,7 @@ data class Order(
     val userAddress: String = "",
     val items: List<CartItem> = emptyList(),
     val totalPrice: Double = 0.0,
-    val paymentMethod: String = "", // Thêm trường này
+    val paymentMethod: String = "",
     val status: String = "Đang xử lý",
     val orderDate: Long = System.currentTimeMillis()
 ) : Serializable
@@ -43,13 +48,9 @@ object CartRepository {
             items.add(CartItem(product, 1))
         }
     }
-
-    // Hàm xóa sản phẩm khỏi giỏ
     fun removeFromCart(item: CartItem) {
         items.remove(item)
     }
-
-    // Hàm cập nhật số lượng
     fun updateQuantity(item: CartItem, newQuantity: Int) {
         if (newQuantity > 0) {
             item.quantity = newQuantity
@@ -57,11 +58,9 @@ object CartRepository {
             items.remove(item)
         }
     }
-
     fun getTotalPrice(): Double {
         return items.sumOf { it.product.price * it.quantity }
     }
-
     fun clearCart() {
         items.clear()
     }
