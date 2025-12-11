@@ -3,6 +3,8 @@ package com.example.giuaki
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeActivity : AppCompatActivity() {
@@ -18,9 +21,25 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var adapter: ProductAdapter
     private val featuredList = mutableListOf<Product>()
 
+    private lateinit var viewPagerBanner : ViewPager2
+    private lateinit var bannerAdapter: BannerAdapter
+    private val bannerHandler = Handler(Looper.getMainLooper())
+    private val bannerRunnable = Runnable {
+        var currentItem = viewPagerBanner.currentItem
+        val totalItem = bannerAdapter.itemCount - 1
+
+        if (currentItem < totalItem) {
+            currentItem++
+            viewPagerBanner.currentItem = currentItem
+        } else {
+            viewPagerBanner.currentItem = 0
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
+        setupBanner()
         setupFeaturedRecyclerView()
         loadFeaturedProducts()
 
@@ -50,8 +69,6 @@ class HomeActivity : AppCompatActivity() {
         search.setOnClickListener { val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
-
-        // ... (Giữ nguyên các sự kiện click category) ...
         imgCPU.setOnClickListener {
             val intent = Intent(this, ProductListActivity::class.java)
             intent.putExtra("CATEGORY_NAME", "cpu")
@@ -83,7 +100,38 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun setupBanner() {
+        viewPagerBanner = findViewById(R.id.viewPagerBanner)
+        val listBanners = listOf(
+            R.drawable.banner_1,
+            R.drawable.banner_3,
+            R.drawable.banner_5,
+            R.drawable.banner_2,
+            R.drawable.banner_4,
+            R.drawable.banner_6
+        )
 
+        bannerAdapter =  BannerAdapter(listBanners)
+        viewPagerBanner.adapter = bannerAdapter
+
+        viewPagerBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                bannerHandler.removeCallbacks(bannerRunnable)
+                bannerHandler.postDelayed(bannerRunnable, 3000)
+            }
+        })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        bannerHandler.removeCallbacks(bannerRunnable)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bannerHandler.removeCallbacks(bannerRunnable,3000)
+    }
     private fun setupFeaturedRecyclerView() {
         rvFeaturedProducts = findViewById(R.id.rvFeaturedProducts)
         adapter = ProductAdapter(featuredList)

@@ -13,20 +13,11 @@
         android:paddingTop="10dp"
         android:paddingBottom="20dp">
 
-        <ImageView
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerBanner"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            app:srcCompat="@drawable/build"
-            android:scaleType="centerCrop"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/ghe"
-            android:scaleType="centerCrop"/>
-
-
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
