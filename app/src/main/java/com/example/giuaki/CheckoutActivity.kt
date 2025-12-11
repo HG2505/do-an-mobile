@@ -33,24 +33,16 @@ class CheckoutActivity : AppCompatActivity() {
         val rgPayment = findViewById<RadioGroup>(R.id.rgPaymentMethod)
         val layoutBankInfo = findViewById<LinearLayout>(R.id.layoutBankInfo)
         val layoutMomoInfo = findViewById<LinearLayout>(R.id.layoutMomoInfo)
-
         val btnConfirm = findViewById<Button>(R.id.btnPlaceOrder)
-
-        // Tính tổng tiền
         val formatter = DecimalFormat("#,###")
         val shipFee = 30000.0
         val subTotal = CartRepository.getTotalPrice()
         val finalTotal = subTotal + shipFee
-
         tvTotal.text = "${formatter.format(finalTotal)} VND"
-
-        // Tự động điền tên
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             edtName.setText(currentUser.displayName)
         }
-
-        // Xử lý sự kiện chọn phương thức thanh toán để hiện thông tin
         rgPayment.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rbBankTransfer -> {
@@ -61,22 +53,18 @@ class CheckoutActivity : AppCompatActivity() {
                     layoutBankInfo.visibility = View.GONE
                     layoutMomoInfo.visibility = View.VISIBLE
                 }
-                else -> { // COD
+                else -> {
                     layoutBankInfo.visibility = View.GONE
                     layoutMomoInfo.visibility = View.GONE
                 }
             }
         }
-
         btnBack.setOnClickListener { finish() }
-
         btnConfirm.setOnClickListener {
             val name = edtName.text.toString().trim()
             val phone = edtPhone.text.toString().trim()
             val address = edtAddress.text.toString().trim()
-
             val selectedPaymentId = rgPayment.checkedRadioButtonId
-
             if (name.isEmpty() || phone.isEmpty() || address.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show()
             } else if (selectedPaymentId == -1) {
@@ -89,13 +77,11 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun saveOrderToFirebase(name: String, phone: String, address: String, total: Double, paymentMethod: String) {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "GUEST"
         val orderRef = db.collection("Orders").document()
         val orderId = orderRef.id
-
         val order = Order(
             id = orderId,
             userId = userId,
@@ -108,7 +94,6 @@ class CheckoutActivity : AppCompatActivity() {
             status = "Đang xử lý",
             orderDate = System.currentTimeMillis()
         )
-
         orderRef.set(order)
             .addOnSuccessListener {
                 CartRepository.clearCart()

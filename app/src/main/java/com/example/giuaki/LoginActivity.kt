@@ -77,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     } else {
                         val errorMessage = task.exception?.message ?: "Đăng nhập thất bại"
-
                         Toast.makeText(this, "Lỗi: $errorMessage", Toast.LENGTH_LONG).show()
 
                     }

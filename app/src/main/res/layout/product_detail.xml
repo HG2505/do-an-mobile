@@ -119,7 +119,7 @@
             android:id="@+id/btnDetailAddToCart"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:backgroundTint="#2962FF"
+            android:backgroundTint="#FF5722"
             android:text="Thêm vào giỏ hàng"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
